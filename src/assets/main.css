@@ -10,8 +10,8 @@ body {
 }
 
 #app {
-    /*background-image: url("https://img.freepik.com/fotos-gratis/a-chuva-de-fundo-cai-de-perto_23-2148900868.jpg?w=1500&t=st=1683376959~exp=1683377559~hmac=759bd3ebd24cf7e5844e0394da87738f3ebcfe002351c133929c780ce8881eb0");*/
-    background-position: center;
+    background-image: url("https://raw.githubusercontent.com/Fe-lipe-Alves/meteo-weathe/master/resources/images/backgrounds/background-005.webp");
+    background-position: bottom;
     background-size: cover;
     background-repeat: no-repeat;
 }
