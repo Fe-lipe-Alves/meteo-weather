@@ -1,16 +1,22 @@
 @import './base.css';
 
+:root {
+    /*--bg-subcolor: rgba(255,255,255, 0.3);*/
+    /*--bg-subcolor: rgba(0,0,0, 0.2);*/
+    --bg-subcolor: rgba(40, 18, 52, 0.2);
+}
+
 html, body, #app {
     width: 100%;
     height: 100%;
 }
 
-body {
-    background-image: linear-gradient(45deg, rgba(37, 150, 190, 0.5) 0%, rgba(130, 175, 34, 0.5) 100%);
-}
-
 #app {
-    background-image: url("https://raw.githubusercontent.com/Fe-lipe-Alves/meteo-weathe/master/resources/images/backgrounds/background-005.webp");
+    background-color: #b5eaff;
+    /*background: linear-gradient(0deg, var(--bg-subcolor), var(--bg-subcolor)), url("https://c.wallhere.com/photos/0e/ef/night_rain_cityscape_artwork-215856.jpg!d");*/
+    /*background: linear-gradient(0deg, var(--bg-subcolor), var(--bg-subcolor)), url("https://img.freepik.com/fotos-gratis/arvores-proximas-umas-das-outras-em-um-campo-durante-o-dia_181624-11202.jpg?w=740&t=st=1685587212~exp=1685587812~hmac=51640e42c16bb755428072280a376fcebdda8eb309a8d62a04fddf40e6733574");*/
+    /*background: linear-gradient(0deg, var(--bg-subcolor), var(--bg-subcolor)), url("https://img.freepik.com/fotos-gratis/ceu-azul-com-nuvens_1417-1556.jpg?w=740&t=st=1685587194~exp=1685587794~hmac=c3df592a121dd58be61059d9fa2ce44284f4d60b584ce95718724b629ecf2ebc");*/
+    background: linear-gradient(0deg, var(--bg-subcolor), var(--bg-subcolor)), url("https://img.freepik.com/fotos-gratis/foto-de-baixo-angulo-da-times-square-em-nova-york-eua_181624-47715.jpg?w=2000&t=st=1685587200~exp=1685587800~hmac=77b9eb19910ba3b7c319d617a5ee83d943bfca4733ad1ef7c85cb85e91769722");
     background-position: bottom;
     background-size: cover;
     background-repeat: no-repeat;
