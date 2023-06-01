@@ -1,15 +1,15 @@
 <template>
-  <header class="w-10/12 mx-auto flex justify-between items-center py-8">
-    <div>
-        <h1>MeteoWeather</h1>
+  <header class="w-8/12 mx-auto flex grid-cols-3 justify-between items-center py-8">
+    <div class="flex justify-start flex-1">
+        <h1 class="text-white drop-shadow-lg">MeteoWeather</h1>
     </div>
 
-    <div>
+    <div class="flex-0">
         <InputSearch/>
     </div>
 
-    <div>
-        <span>06/05/2023</span>
+    <div class="flex justify-end flex-1">
+        <span class="text-white drop-shadow-lg">Seg. 08 de maio de 2023, 15:35</span>
     </div>
   </header>
 </template>
