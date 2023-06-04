@@ -12,7 +12,6 @@ module.exports = {
         'cultured': '#F8F8F8',
         'black-olive': '#404040',
         'black-smoky': '#0E0E0E',
-        'black-smoky': '#f1f1f1',
         ...defaultTheme.colors
       },
       fontFamily: {
