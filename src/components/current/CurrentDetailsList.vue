@@ -12,7 +12,7 @@ const details = computed(() => {
 </script>
 
 <template>
-  <div class="mt-4 flex gap-4 text-center font-medium text-black-olive text-sm">
+  <div class="mt-4 flex gap-4 text-center text-xs lg:text-sm font-medium text-black-olive ">
     <span
         class="bg-cultured/75 px-4 py-1 rounded-md"
         v-for="(detail, index) in details"

@@ -6,7 +6,7 @@ import CurrentIcon from "@/components/current/CurrentIcon.vue";
 
 <template>
   <section class="w-full">
-    <div class="w-full mx-auto flex flex-col items-center gap-4">
+    <div class="w-10/12 lg:w-8/12 mx-auto flex flex-col items-center gap-2 lg:gap-4">
       <CurrentIcon code="40010_rain_large" description="Ícone de chuva leve"/>
 
       <CurrentWeather description="Chuva leve" degrees="32"/>

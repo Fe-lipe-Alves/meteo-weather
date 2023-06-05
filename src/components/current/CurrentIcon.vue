@@ -14,7 +14,7 @@ const iconPath = computed(() => {
 </script>
 
 <template>
-  <div class="flex justify-center items-center my-4">
+  <div class="flex justify-center items-center my-0 lg:my-4">
     <img
         :src="iconPath"
         :alt="props.description"
