@@ -1,6 +1,7 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
 
-const cor = 'rgba(65,65,65,0.71)';
+const cor = 'rgba(239,239,239,0.71)';
+
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -21,8 +22,8 @@ module.exports = {
       },
       dropShadow: {
         '4xl': [
-          '0 60px 60px rgba(240, 240, 240, 0.5)',
           '0 20px 20px '+cor,
+          '0 60px 60px rgba(40, 40, 40, 0.2)',
         ]
       }
     },
