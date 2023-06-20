@@ -1,99 +1,29 @@
-export class ForecastModel {
+import {descriptions} from "@/data/weather-code";
+import moment from "moment/moment";
+import type {Moment} from "moment/moment";
 
+export abstract class ForecastModel {
+    public startTime?: Moment;
+    public cloudCover?: number
+    public humidity?: number
+    public precipitationIntensity?: number
+    public precipitationProbability?: number
+    public precipitationType?: number
+    public temperature?: number
+    public temperatureApparent?: number
+    public weatherCode?: number
+    public windDirection?: number
+    public windGust?: number
+    public windSpeed?: number
+    public description?: string
 
-    cloudBaseAvg: any
-    cloudBaseMax: any
-    cloudBaseMin: any
-    cloudCeilingAvg: any
-    cloudCeilingMax: any
-    cloudCeilingMin: any
-    cloudCoverAvg: any
-    cloudCoverMax: any
-    cloudCoverMin: any
-    dewPointAvg: any
-    dewPointMax: any
-    dewPointMin: any
-    evapotranspirationAvg: any
-    evapotranspirationMax: any
-    evapotranspirationMin: any
-    evapotranspirationSum: any
-    freezingRainIntensityAvg: any
-    freezingRainIntensityMax: any
-    freezingRainIntensityMin: any
-    humidityAvg: any
-    humidityMax: any
-    humidityMin: any
-    iceAccumulationAvg: any
-    iceAccumulationLweAvg: any
-    iceAccumulationLweMax: any
-    iceAccumulationLweMin: any
-    iceAccumulationLweSum: any
-    iceAccumulationMax: any
-    iceAccumulationMin: any
-    iceAccumulationSum: any
-    moonriseTime: any
-    moonsetTime: any
-    precipitationProbabilityAvg: any
-    precipitationProbabilityMax: any
-    precipitationProbabilityMin: any
-    pressureSurfaceLevelAvg: any
-    pressureSurfaceLevelMax: any
-    pressureSurfaceLevelMin: any
-    rainAccumulationAvg: any
-    rainAccumulationLweAvg: any
-    rainAccumulationLweMax: any
-    rainAccumulationLweMin: any
-    rainAccumulationMax: any
-    rainAccumulationMin: any
-    rainAccumulationSum: any
-    rainIntensityAvg: any
-    rainIntensityMax: any
-    rainIntensityMin: any
-    sleetAccumulationAvg: any
-    sleetAccumulationLweAvg: any
-    sleetAccumulationLweMax: any
-    sleetAccumulationLweMin: any
-    sleetAccumulationLweSum: any
-    sleetAccumulationMax: any
-    sleetAccumulationMin: any
-    sleetIntensityAvg: any
-    sleetIntensityMax: any
-    sleetIntensityMin: any
-    snowAccumulationAvg: any
-    snowAccumulationLweAvg: any
-    snowAccumulationLweMax: any
-    snowAccumulationLweMin: any
-    snowAccumulationLweSum: any
-    snowAccumulationMax: any
-    snowAccumulationMin: any
-    snowAccumulationSum: any
-    snowIntensityAvg: any
-    snowIntensityMax: any
-    snowIntensityMin: any
-    sunriseTime: any
-    sunsetTime: any
-    temperatureApparentAvg: any
-    temperatureApparentMax: any
-    temperatureApparentMin: any
-    temperatureAvg: any
-    temperatureMax: any
-    temperatureMin: any
-    uvHealthConcernAvg: any
-    uvHealthConcernMax: any
-    uvHealthConcernMin: any
-    uvIndexAvg: any
-    uvIndexMax: any
-    uvIndexMin: any
-    visibilityAvg: any
-    visibilityMax: any
-    visibilityMin: any
-    weatherCodeMax: any
-    weatherCodeMin: any
-    windDirectionAvg: any
-    windGustAvg: any
-    windGustMax: any
-    windGustMin: any
-    windSpeedAvg: any
-    windSpeedMax: any
-    windSpeedMin: any
+    public constructor(data: any) {
+        Object.assign(this, data);
+
+        this.startTime = moment(this.startTime)
+
+        if (this.weatherCode) {
+            this.description = descriptions[this.weatherCode]
+        }
+    }
 }
