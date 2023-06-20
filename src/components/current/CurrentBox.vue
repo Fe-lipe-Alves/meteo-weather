@@ -9,10 +9,6 @@ import {computed, onMounted, reactive} from "vue";
 const useForecast = useForecastStore()
 const {current} = storeToRefs(useForecast)
 
-const icon = computed(() => {
-  return `${current.value.weatherCode}1_clear_large`
-})
-
 const details = reactive([])
 
 function setDetails() {
@@ -41,7 +37,7 @@ onMounted(() => {
   <section class="w-full">
     <div class="w-10/12 lg:w-8/12 mx-auto flex flex-col items-center gap-2 lg:gap-4">
       <CurrentIcon
-          :code="icon"
+          :code="`${current.weatherCode}1`"
           :description="`Ícone de ${current.description}`"
       />
 

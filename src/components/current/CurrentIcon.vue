@@ -9,7 +9,7 @@ const props = defineProps<{
 const size = 144
 
 const iconPath = computed(() => {
-  return new URL(`../../assets/tomorrow-icons/v2/large/png/${props.code}@2x.png`, import.meta.url).href
+  return new URL(`../../assets/tomorrow-icons/v2/large/png/${props.code}_large@2x.png`, import.meta.url).href
 })
 </script>
 

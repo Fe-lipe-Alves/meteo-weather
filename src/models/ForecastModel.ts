@@ -20,7 +20,7 @@ export abstract class ForecastModel {
     public constructor(data: any) {
         Object.assign(this, data);
 
-        this.startTime = moment(this.startTime)
+        this.startTime = moment(data.startTime)
 
         if (this.weatherCode) {
             this.description = descriptions[this.weatherCode]

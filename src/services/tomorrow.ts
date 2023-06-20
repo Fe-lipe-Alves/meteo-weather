@@ -47,25 +47,29 @@ export async function getCurrentData() {
     })
 }
 
+function ex(obj: any) {
+    return {...obj.values, startTime: obj.startTime}
+}
+
 export async function getForecastData() {
     const response = dataCurrentResponse
 
     // Atual
     const currentResponse = response.data.timelines.filter(timeline => timeline.timestep === 'current')[0].intervals[0]
-    const current = new CurrentModel({...currentResponse.values, startTime: currentResponse.startTime})
+    const current = new CurrentModel(ex(currentResponse))
 
     // Horário a horário
     const hourly = new Array<HourModel>()
     const hoursResponse = response.data.timelines.filter(timeline => timeline.timestep === '1h')
     hoursResponse[0].intervals.map(hour => {
-        hourly.push(new HourModel(hour))
+        hourly.push(new HourModel(ex(hour)))
     })
 
     // Dia a dia
     const daily = new Array<DayModel>()
     const daysResponse = response.data.timelines.filter(timeline => timeline.timestep === '1d')
     daysResponse[0].intervals.map(day => {
-        daily.push(new DayModel(day))
+        daily.push(new DayModel(ex(day)))
     })
 
     return {current, hourly, daily}
