@@ -11,6 +11,8 @@ export abstract class ForecastModel {
     public precipitationType?: number
     public temperature?: number
     public temperatureApparent?: number
+    public temperatureMax?: number
+    public temperatureMin?: number
     public weatherCode?: number
     public windDirection?: number
     public windGust?: number
