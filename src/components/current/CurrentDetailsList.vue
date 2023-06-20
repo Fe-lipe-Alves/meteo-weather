@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import {computed} from "vue";
+import {useForecastStore} from "@/stores/forecast";
+
+const useForecast = useForecastStore()
 
 const details = computed(() => {
   return [
-    'Sensação 30°',
-    'Vento 5 km/h',
-    'Umidade 60%',
-    'Chance de chuva 5%',
+    'Sensação ' + useForecast.current.temperatureApparent,
+    'Vento ' + useForecast.current.windSpeed + ' km/h',
+    'Umidade ' + useForecast.current.humidity + '%',
+    'Chance de chuva ' + useForecast.current.precipitationProbability + '%',
   ]
 })
 </script>
