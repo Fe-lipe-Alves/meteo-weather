@@ -3,12 +3,12 @@ import {HourModel} from "@/models/HourModel";
 import {computed, reactive} from "vue";
 import type {DayModel} from "@/models/DayModel";
 import {CurrentModel} from "@/models/CurrentModel";
-import {dataCurrentResponse} from "@/data/data-current-response";
+import {getForecastData} from "@/services/tomorrow";
 
 export const useForecastStore = defineStore('forecast', () => {
     const hourly: HourModel[] = reactive(new Array<HourModel>())
     const daily: DayModel[] = reactive(new Array<DayModel>())
-    const current: CurrentModel = reactive(new CurrentModel)
+    const current: CurrentModel = reactive(new CurrentModel({}))
 
     const color = computed(() => {
         let colorString = '#';
@@ -42,9 +42,12 @@ export const useForecastStore = defineStore('forecast', () => {
         return colorString;
     })
 
-    function loadWeather() {
-        // const response = await getCurrentData()
-        current.fillFromResponse(dataCurrentResponse)
+    async function loadWeather() {
+        const response = await getForecastData()
+
+        Object.assign(current, response.current)
+        response.hourly.map((hour: HourModel) => hourly.push(hour))
+        response.daily.map((day: DayModel) => daily.push(day))
     }
 
     return { hourly, daily, current, color, loadWeather }

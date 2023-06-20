@@ -17,15 +17,19 @@ const details = reactive([])
 
 function setDetails() {
   const fields = [
-    'Sensação ' + Math.round(+current.value.temperatureApparent) + '°C',
-    'Vento ' + Math.round(+current.value.windSpeed) + ' km/h',
-    'Umidade ' + Math.round(+current.value.humidity) + '%',
-    'Chance de chuva ' + Math.round(+current.value.precipitationProbability) + '%',
+    'Sensação ' + round(current.value.temperatureApparent) + '°C',
+    'Vento ' + round(current.value.windSpeed ?? 0) + ' km/h',
+    'Umidade ' + round(current.value.humidity) + '%',
+    'Chance de chuva ' + round(current.value.precipitationProbability) + '%',
   ]
 
   for (let id = 0; id < fields.length; id++) {
     details.push({id, text: fields[id]})
   }
+}
+
+function round(number: number|null|undefined) {
+  return Math.round(number ?? 0)
 }
 
 onMounted(() => {
@@ -43,7 +47,7 @@ onMounted(() => {
 
       <CurrentWeather
           :description="`${current.description}`"
-          :temperature="Math.round(+current.temperature)"
+          :temperature="round(current.temperature)"
       />
 
       <CurrentDetailsList

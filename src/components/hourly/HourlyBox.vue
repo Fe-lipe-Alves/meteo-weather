@@ -1,6 +1,12 @@
 <script setup lang="ts">
-
 import HourlyGroupDay from "@/components/hourly/HourlyGroupDay.vue";
+import {useForecastStore} from "@/stores/forecast";
+import {storeToRefs} from "pinia";
+
+const useForecast = useForecastStore()
+const {hourly} = storeToRefs(useForecast)
+
+
 </script>
 
 <template>
