@@ -2,8 +2,8 @@ import {defineStore} from "pinia";
 import {HourModel} from "@/models/HourModel";
 import {computed, reactive} from "vue";
 import type {DayModel} from "@/models/DayModel";
-import {getCurrentData} from "@/services/tomorrow";
 import {CurrentModel} from "@/models/CurrentModel";
+import {dataCurrentResponse} from "@/data/data-current-response";
 
 export const useForecastStore = defineStore('forecast', () => {
     const hourly: HourModel[] = reactive(new Array<HourModel>())
@@ -44,8 +44,7 @@ export const useForecastStore = defineStore('forecast', () => {
 
     function loadWeather() {
         // const response = await getCurrentData()
-        const response = JSON.parse('{"data":{"timelines":[{"timestep":"current","endTime":"2023-06-05T08:07:00-03:00","startTime":"2023-06-05T08:07:00-03:00","intervals":[{"startTime":"2023-06-05T08:07:00-03:00","values":{"cloudCover":100,"humidity":95,"precipitationIntensity":1.63,"precipitationProbability":99,"precipitationType":1,"temperature":10.5,"temperatureApparent":10.5,"weatherCode":4200,"windDirection":47,"windGust":6,"windSpeed":2.63}}]}]}}')
-        current.fillFromResponse(response)
+        current.fillFromResponse(dataCurrentResponse)
     }
 
     return { hourly, daily, current, color, loadWeather }
