@@ -42,8 +42,8 @@ export const useForecastStore = defineStore('forecast', () => {
         return colorString;
     })
 
-    async function loadWeather() {
-        const response = await getForecastData()
+    async function loadWeather(latitude: number, longitude: number, timezone: string) {
+        const response = await getForecastData(latitude, longitude, timezone)
 
         Object.assign(current, response.current)
         response.hourly.map((hour: HourModel) => hourly.push(hour))

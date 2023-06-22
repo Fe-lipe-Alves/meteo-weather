@@ -4,14 +4,14 @@ import CurrentDetailsList from "@/components/current/CurrentDetailsList.vue";
 import CurrentIcon from "@/components/current/CurrentIcon.vue";
 import {useForecastStore} from "@/stores/forecast";
 import {storeToRefs} from "pinia";
-import {computed, onMounted, reactive} from "vue";
+import {computed} from "vue";
 
 const useForecast = useForecastStore()
 const {current} = storeToRefs(useForecast)
 
-const details = reactive([])
+const details = computed(() => {
+  const details = []
 
-function setDetails() {
   const fields = [
     'Sensação ' + round(current.value.temperatureApparent) + '°C',
     'Vento ' + round(current.value.windSpeed ?? 0) + ' km/h',
@@ -22,15 +22,13 @@ function setDetails() {
   for (let id = 0; id < fields.length; id++) {
     details.push({id, text: fields[id]})
   }
-}
+
+  return details
+})
 
 function round(number: number|null|undefined) {
   return Math.round(number ?? 0)
 }
-
-onMounted(() => {
-  setDetails()
-})
 </script>
 
 <template>
