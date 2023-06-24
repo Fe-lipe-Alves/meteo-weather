@@ -39,7 +39,8 @@ const sunMoon = computed(() => {
   <section class="w-full">
     <div class="w-10/12 lg:w-8/12 mx-auto flex flex-col items-center gap-2 lg:gap-4">
       <CurrentIcon
-          :code="`${current.weatherCode}${sunMoon}`"
+          :code="current.weatherCode"
+          :sun-moon="sunMoon"
           :description="`Ícone de ${current.description}`"
       />
 

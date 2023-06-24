@@ -2,6 +2,7 @@
 import type {HourModel} from "@/models/HourModel";
 import {computed} from "vue";
 import moment from "moment/moment";
+import IconItem from "@/components/IconItem.vue";
 
 const size = 24
 
@@ -20,21 +21,17 @@ const temperature = computed(() => {
 const sunMoon = computed(() => {
   return props.hour.startTime?.isBetween(props.hour.sunriseTime, props.hour.sunsetTime) ? '0' : '1'
 })
-
-const iconPath = computed(() => {
-  return new URL(`../../assets/tomorrow-icons/v2/small/png/${props.hour.weatherCode}${sunMoon.value}_small@2x.png`, import.meta.url).href
-})
 </script>
 
 <template>
   <div>
-    <img :src="iconPath"
-         :alt="hour.description"
-         :title="hour.description"
-         :width="size"
-         :height="size"
-         :data="`${hour.weatherCode}${sunMoon}_large@2x.png`"
-    >
+    <IconItem
+        type="small"
+        :size="size"
+        :weather-code="hour.weatherCode"
+        :description="hour.description"
+        :sun-moon="sunMoon"
+    />
     <span>{{ temperature }}°</span>
     <small>{{ hourFormated }}</small>
   </div>

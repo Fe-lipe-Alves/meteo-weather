@@ -2,16 +2,13 @@
 import type {DayModel} from "@/models/DayModel";
 import {computed} from "vue";
 import 'moment/locale/pt-br';
+import IconItem from "@/components/IconItem.vue";
 
 const size = 36
 
 const props = defineProps<{
   day: DayModel
 }>()
-
-const iconPath = computed(() => {
-  return new URL(`../../assets/tomorrow-icons/v2/small/png/${props.day.weatherCode}0_small@2x.png`, import.meta.url).href
-})
 
 const dayName = computed(() => {
   const day = props.day.startTime?.locale('pt-br')?.clone()?.startOf('day')?.calendar(null, {
@@ -35,11 +32,13 @@ function round(number: number|null|undefined) {
   <div class="flex-1 flex items-center gap-2 p-2 flex-col bg-cultured rounded-md">
     <span>{{ dayName }}</span>
     <div class="flex-1 flex items-end">
-      <img :src="iconPath"
-           :alt="day.description"
-           :title="day.description"
-           :width="size"
-           :height="size">
+      <IconItem
+          type="small"
+          :size="size"
+          :weather-code="day.weatherCode"
+          :description="day.description"
+          :sun-moon="0"
+      />
     </div>
     <div class="flex gap-2">
       <span>{{ round(day.temperatureMax) }}°</span>

@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import {computed} from "vue";
+import IconItem from "@/components/IconItem.vue";
 
 const props = defineProps<{
-  code: string
-  description?: string
+  code: number
+  sunMoon: 0|1
+  description: string
 }>()
 
 const size = 144
@@ -19,13 +21,14 @@ const iconPath = computed(() => {
       :class="`w-[${size}px] h-[${size}px]`"
       :title="description"
   >
-    <img
-        :src="iconPath"
-        :alt="props.description"
+    <IconItem
         class="drop-shadow-4xl"
-        :width="size"
-        :height="size"
-    >
+        :size="size"
+        type="large"
+        :weather-code="code"
+        :description="description"
+        :sun-moon="sunMoon"
+    />
   </div>
 </template>
 

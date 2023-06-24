@@ -2,6 +2,7 @@
   <div
       class="lg:w-96 pb-2 rounded-[1.4rem] relative"
       :class="{'rounded-b-none bg-cultured': isFocusAndNotEmpty}"
+      @focusin="setFocus(true)"
   >
     <input
         type="text"
@@ -9,8 +10,6 @@
         class="w-full rounded-[1.4rem] shadow px-8 py-2 text-center text-lg focus:outline-none bg-cultured/70"
         :class="{'bg-white': isFocus}"
         :value="search"
-        @focusin="setFocus(true)"
-        @focusout="setFocus(false)"
         @input="runSearch"
     >
 
@@ -36,7 +35,7 @@
 import {computed, ref, watch} from "vue";
 import {useIpInfoStore} from "@/stores/ipInfos";
 import {storeToRefs} from "pinia";
-import {searchCity} from "@/services/citiesSearch";
+import {getTimezoneCity, searchCity} from "@/services/citiesSearch";
 import type {CitySearchType} from "@/types/CitySearchType";
 import {useForecastStore} from "@/stores/forecast";
 
@@ -60,12 +59,16 @@ async function runSearch(event) {
   const text = event.target.value
 
   if (text.length > 3) {
-    cities.value = await searchCity()
+    cities.value = await searchCity(text)
   }
 }
 
-function selectCity(city: CitySearchType) {
-
+async function selectCity(city: CitySearchType) {
+  console.log(`cidade ${city.name} selecionada`)
+  const timezone = await getTimezoneCity(city.name)
+  console.log('timezone é ', timezone)
+  await searchForecast(city.latitude, city.longitude, timezone.timezone)
+  console.log(useForecast.current)
 }
 
 async function searchForecast(latitude, longitude, timezone) {

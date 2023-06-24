@@ -15,6 +15,6 @@ export async function searchCity(text: string) {
     return await request(`city?name=${text}&limit=4`)
 }
 
-export async function getCity(id: string) {
-    https://api.api-ninjas.com/v1/timezone?city=
+export async function getTimezoneCity(cityName: string) {
+    return await request(`timezone?city=${cityName}`)
 }
