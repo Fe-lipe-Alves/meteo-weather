@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import {HourModel} from "@/models/HourModel";
-import {computed, reactive} from "vue";
+import {computed, reactive, ref} from "vue";
 import type {DayModel} from "@/models/DayModel";
 import {CurrentModel} from "@/models/CurrentModel";
 import {getForecastData} from "@/services/tomorrow";
@@ -9,6 +9,7 @@ export const useForecastStore = defineStore('forecast', () => {
     const hourly: HourModel[] = reactive(new Array<HourModel>())
     const daily: DayModel[] = reactive(new Array<DayModel>())
     const current: CurrentModel = reactive(new CurrentModel({}))
+    const loading = ref(false)
 
     const color = computed(() => {
         let colorString = '#';
@@ -54,5 +55,5 @@ export const useForecastStore = defineStore('forecast', () => {
         response.daily.map((day: DayModel) => daily.push(day))
     }
 
-    return { hourly, daily, current, color, loadWeather }
+    return { hourly, daily, current, loading, color, loadWeather }
 })

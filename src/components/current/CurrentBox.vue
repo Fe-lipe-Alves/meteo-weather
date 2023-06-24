@@ -31,7 +31,7 @@ function round(number: number|null|undefined) {
 }
 
 const sunMoon = computed(() => {
-  return current.value.startTime?.isBetween(current.value.sunriseTime, current.value.sunsetTime) ? '0' : '1'
+  return current.value.startTime?.isBetween(current.value.sunriseTime, current.value.sunsetTime) ? 0 : 1
 })
 </script>
 

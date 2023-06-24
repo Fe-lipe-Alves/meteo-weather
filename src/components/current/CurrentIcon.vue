@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import {computed} from "vue";
 import IconItem from "@/components/IconItem.vue";
+import {useForecastStore} from "@/stores/forecast";
+import {storeToRefs} from "pinia";
 
 const props = defineProps<{
   code: number
@@ -10,21 +11,21 @@ const props = defineProps<{
 
 const size = 144
 
-const iconPath = computed(() => {
-  return new URL(`../../assets/tomorrow-icons/v2/large/png/${props.code}_large@2x.png`, import.meta.url).href
-})
+const useForecast = useForecastStore()
+const {loading} = storeToRefs(useForecast)
 </script>
 
 <template>
   <div
-      class="bg-slate-50/25 rounded-full p-4 flex justify-center items-center "
-      :class="`w-[${size}px] h-[${size}px]`"
+      class="icon-box bg-slate-50/25 rounded-full p-4 flex justify-center items-center"
+      :class="{'loading-circle': loading}"
       :title="description"
   >
     <IconItem
         class="drop-shadow-4xl"
-        :size="size"
         type="large"
+        v-if="!loading"
+        :size="size"
         :weather-code="code"
         :description="description"
         :sun-moon="sunMoon"
@@ -32,6 +33,24 @@ const iconPath = computed(() => {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+.icon-box {
+  width: calc(v-bind(size) * 1px);
+  height: calc(v-bind(size) * 1px);
+}
 
+.loading-circle::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top: 3px solid #ffffff;
+  border-radius: 50%;
+  animation: spin .5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 </style>

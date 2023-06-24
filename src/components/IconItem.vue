@@ -10,6 +10,10 @@ const props = defineProps<{
 }>()
 
 const iconPath = computed(() => {
+  if (!props.weatherCode) {
+    return ''
+  }
+
   const firstIcon = `/tomorrow-icons/v2/${props.type}/png/${props.weatherCode}${props.sunMoon}_${props.type}@2x.png`
   const secondIcon = `/tomorrow-icons/v2/${props.type}/png/${props.weatherCode}0_${props.type}@2x.png`
 
@@ -17,6 +21,11 @@ const iconPath = computed(() => {
 })
 
 function imageExists(image_url) {
+  const dontExists = [1001, 4000, 4200]
+  if (dontExists.indexOf(props.weatherCode) > -1) {
+    return false
+  }
+
   const http = new XMLHttpRequest();
 
   http.open('HEAD', image_url, false);

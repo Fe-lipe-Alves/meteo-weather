@@ -29,9 +29,10 @@ const dayName = computed(() => {
     </div>
     <div class="flex divide-x divide-gray-300">
       <HourlyHour
-          v-for="hour in day"
+          v-for="(hour, index) in day"
           :key="hour"
           :hour="hour"
+          :loading-icon="index < 20 ? 'loading' : 'lazy'"
           class="w-fit px-2 flex flex-col items-center"
       />
     </div>

@@ -8,6 +8,7 @@ const size = 24
 
 const props = defineProps<{
   hour: HourModel
+  loadingIcon: 'lazy'|'loading'
 }>()
 
 const hourFormated = computed(() => {
@@ -19,7 +20,7 @@ const temperature = computed(() => {
 })
 
 const sunMoon = computed(() => {
-  return props.hour.startTime?.isBetween(props.hour.sunriseTime, props.hour.sunsetTime) ? '0' : '1'
+  return props.hour.startTime?.isBetween(props.hour.sunriseTime, props.hour.sunsetTime) ? 0 : 1
 })
 </script>
 
@@ -31,6 +32,7 @@ const sunMoon = computed(() => {
         :weather-code="hour.weatherCode"
         :description="hour.description"
         :sun-moon="sunMoon"
+        :loading="loadingIcon"
     />
     <span>{{ temperature }}°</span>
     <small>{{ hourFormated }}</small>

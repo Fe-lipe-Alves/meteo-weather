@@ -1,23 +1,8 @@
 @import './base.css';
 
-:root {
-    --bg-subcolor: rgba(134, 134, 134, 0.3);
-}
-
 html, body, #app {
     min-width: 100%;
     min-height: 100%;
-}
-
-#app {
-    background-color: #b5eaff;
-    /*background: linear-gradient(0deg, var(--bg-subcolor), var(--bg-subcolor)), url("https://c.wallhere.com/photos/0e/ef/night_rain_cityscape_artwork-215856.jpg!d");*/
-    /*background: linear-gradient(0deg, var(--bg-subcolor), var(--bg-subcolor)), url("https://img.freepik.com/fotos-gratis/arvores-proximas-umas-das-outras-em-um-campo-durante-o-dia_181624-11202.jpg?w=740&t=st=1685587212~exp=1685587812~hmac=51640e42c16bb755428072280a376fcebdda8eb309a8d62a04fddf40e6733574");*/
-    /*background: linear-gradient(0deg, var(--bg-subcolor), var(--bg-subcolor)), url("https://img.freepik.com/fotos-gratis/ceu-azul-com-nuvens_1417-1556.jpg?w=740&t=st=1685587194~exp=1685587794~hmac=c3df592a121dd58be61059d9fa2ce44284f4d60b584ce95718724b629ecf2ebc");*/
-    background: linear-gradient(0deg, var(--bg-subcolor), var(--bg-subcolor)), url("https://hotelpicadao.com.br/wp-content/uploads/2018/01/paisagem-tropical-wallpaper-1.jpg");
-    background-position: bottom;
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 
 a {
