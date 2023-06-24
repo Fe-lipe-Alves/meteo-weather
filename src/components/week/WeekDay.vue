@@ -19,7 +19,7 @@ const dayName = computed(() => {
     nextDay: '[Amanhã]',
     nextWeek: 'dddd',
     lastDay: '[Ontem]',
-    lastWeek: '[Last] dddd',
+    lastWeek: '[Última] dddd',
     sameElse: 'DD/MM/YYYY'
   })
 
@@ -34,10 +34,13 @@ function round(number: number|null|undefined) {
 <template>
   <div class="flex-1 flex items-center gap-2 p-2 flex-col bg-cultured rounded-md">
     <span>{{ dayName }}</span>
-    <img :src="iconPath"
-         :alt="day.description"
-         :width="size"
-         :height="size">
+    <div class="flex-1 flex items-end">
+      <img :src="iconPath"
+           :alt="day.description"
+           :title="day.description"
+           :width="size"
+           :height="size">
+    </div>
     <div class="flex gap-2">
       <span>{{ round(day.temperatureMax) }}°</span>
       <span class="text-sm">{{ round(day.temperatureMin) }}°</span>

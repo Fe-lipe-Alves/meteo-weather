@@ -14,7 +14,7 @@ const dayName = computed(() => {
     nextDay: '[Amanhã]',
     nextWeek: 'dddd',
     lastDay: '[Ontem]',
-    lastWeek: '[Last] dddd',
+    lastWeek: '[Última] dddd',
     sameElse: 'DD/MM/YYYY'
   })
 

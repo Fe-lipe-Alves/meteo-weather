@@ -9,13 +9,22 @@
     </div>
 
     <div class="flex justify-end flex-1 order-2 lg:order-3">
-        <span class="text-white drop-shadow-lg">Seg. 08 de maio de 2023, 15:35</span>
+        <small class="text-white drop-shadow-lg">{{ date }}</small>
     </div>
   </header>
 </template>
 
 <script lang="ts" setup>
 import InputSearch from "@/components/InputSearch.vue";
+import {useIpInfoStore} from "@/stores/ipInfos";
+import {storeToRefs} from "pinia";
+import {computed} from "vue";
+import moment from "moment/moment";
+import 'moment/locale/pt-br'
+
+const date = computed(() => {
+  return moment().locale('pt-br').format('LLL')
+})
 </script>
 
 <style scoped>

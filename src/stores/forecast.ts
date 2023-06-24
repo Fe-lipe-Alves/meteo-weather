@@ -46,6 +46,10 @@ export const useForecastStore = defineStore('forecast', () => {
         const response = await getForecastData(latitude, longitude, timezone)
 
         Object.assign(current, response.current)
+
+        hourly.splice(0, hourly.length)
+        daily.splice(0, daily.length)
+
         response.hourly.map((hour: HourModel) => hourly.push(hour))
         response.daily.map((day: DayModel) => daily.push(day))
     }

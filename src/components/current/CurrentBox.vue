@@ -29,13 +29,17 @@ const details = computed(() => {
 function round(number: number|null|undefined) {
   return Math.round(number ?? 0)
 }
+
+const sunMoon = computed(() => {
+  return current.value.startTime?.isBetween(current.value.sunriseTime, current.value.sunsetTime) ? '0' : '1'
+})
 </script>
 
 <template>
   <section class="w-full">
     <div class="w-10/12 lg:w-8/12 mx-auto flex flex-col items-center gap-2 lg:gap-4">
       <CurrentIcon
-          :code="`${current.weatherCode}1`"
+          :code="`${current.weatherCode}${sunMoon}`"
           :description="`Ícone de ${current.description}`"
       />
 

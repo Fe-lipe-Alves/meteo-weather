@@ -4,32 +4,39 @@
 
 <script lang="ts" setup>
 import {useForecastStore} from "@/stores/forecast";
-import {onMounted} from "vue";
+import {onBeforeMount} from "vue";
+import {useIpInfoStore} from "@/stores/ipInfos";
+import {storeToRefs} from "pinia";
 
 const useForecast = useForecastStore()
+const useIpInfo = useIpInfoStore()
+const {ipInfo} = storeToRefs(useIpInfo)
+
+async function getLocationFromIp() {
+  await useIpInfo.loadInfos()
+  await searchForecast(ipInfo.value.lat, ipInfo.value.lon, ipInfo.value.timezone)
+}
 
 async function getLocationFromBrowser() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(await searchForecast);
+    navigator.geolocation.getCurrentPosition(async position => {
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+      await searchForecast(position.coords.latitude, position.coords.longitude, timezone)
+    })
   }
 }
 
-async function searchForecast(position) {
+async function searchForecast(latitude, longitude, timezone) {
   try {
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
-    await useForecast.loadWeather(position.coords.latitude, position.coords.longitude, timezone)
+    await useForecast.loadWeather(latitude, longitude, timezone)
   } catch (error) {
     // ToDo // Exibir alerta de erro
     console.log('TEVE UM ERRO')
   }
 }
 
-function getLocationFromIp() {
-
-}
-
-onMounted(async () => {
-  getLocationFromIp
+onBeforeMount(async () => {
+  await getLocationFromIp()
   await getLocationFromBrowser()
 })
 </script>

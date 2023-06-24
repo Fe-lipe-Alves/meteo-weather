@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type {HourModel} from "@/models/HourModel";
 import {computed} from "vue";
+import moment from "moment/moment";
 
 const size = 24
 
@@ -16,8 +17,12 @@ const temperature = computed(() => {
   return Math.round(props.hour.temperature ?? 0)
 })
 
+const sunMoon = computed(() => {
+  return props.hour.startTime?.isBetween(props.hour.sunriseTime, props.hour.sunsetTime) ? '0' : '1'
+})
+
 const iconPath = computed(() => {
-  return new URL(`../../assets/tomorrow-icons/v2/small/png/${props.hour.weatherCode}0_small@2x.png`, import.meta.url).href
+  return new URL(`../../assets/tomorrow-icons/v2/small/png/${props.hour.weatherCode}${sunMoon.value}_small@2x.png`, import.meta.url).href
 })
 </script>
 
@@ -25,9 +30,10 @@ const iconPath = computed(() => {
   <div>
     <img :src="iconPath"
          :alt="hour.description"
+         :title="hour.description"
          :width="size"
          :height="size"
-         :data="`${hour.weatherCode}0_large@2x.png`"
+         :data="`${hour.weatherCode}${sunMoon}_large@2x.png`"
     >
     <span>{{ temperature }}°</span>
     <small>{{ hourFormated }}</small>
