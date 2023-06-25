@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {computed} from "vue";
+import { computed } from 'vue'
 
 const props = defineProps<{
   weatherCode: number
-  sunMoon: 0|1
+  sunMoon: 0 | 1
   size: number
-  type: 'large'|'small'
+  type: 'large' | 'small'
   description: string
 }>()
 
@@ -20,26 +20,27 @@ const iconPath = computed(() => {
   return imageExists(firstIcon) ? firstIcon : secondIcon
 })
 
-function imageExists(image_url) {
+function imageExists(image_url: string) {
   const dontExists = [1001, 4000, 4200]
   if (dontExists.indexOf(props.weatherCode) > -1) {
     return false
   }
 
-  const http = new XMLHttpRequest();
+  const http = new XMLHttpRequest()
 
-  http.open('HEAD', image_url, false);
-  http.send();
+  http.open('HEAD', image_url, false)
+  http.send()
 
-  return http.status != 404;
+  return http.status != 404
 }
 </script>
 
 <template>
-  <img :src="iconPath"
-       :alt="description"
-       :title="description"
-       :width="size"
-       :height="size"
-  >
+  <img
+    :src="iconPath"
+    :alt="description"
+    :title="description"
+    :width="size"
+    :height="size"
+  />
 </template>

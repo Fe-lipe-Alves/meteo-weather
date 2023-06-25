@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import type {HourModel} from "@/models/HourModel";
-import {computed} from "vue";
-import moment from "moment/moment";
-import IconItem from "@/components/IconItem.vue";
+import type { HourModel } from '@/models/HourModel'
+import { computed } from 'vue'
+import IconItem from '@/components/IconItem.vue'
 
 const size = 24
 
 const props = defineProps<{
   hour: HourModel
-  loadingIcon: 'lazy'|'loading'
+  loadingIcon: 'lazy' | 'loading'
 }>()
 
 const hourFormated = computed(() => {
@@ -27,18 +26,16 @@ const sunMoon = computed(() => {
 <template>
   <div>
     <IconItem
-        type="small"
-        :size="size"
-        :weather-code="hour.weatherCode"
-        :description="hour.description"
-        :sun-moon="sunMoon"
-        :loading="loadingIcon"
+      type="small"
+      :size="size"
+      :weather-code="hour.weatherCode"
+      :description="hour.description"
+      :sun-moon="sunMoon"
+      :loading="loadingIcon"
     />
     <span>{{ temperature }}°</span>
     <small>{{ hourFormated }}</small>
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

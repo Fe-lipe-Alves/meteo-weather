@@ -1,5 +1,3 @@
-import {ForecastModel} from "@/models/ForecastModel";
+import { ForecastModel } from '@/models/ForecastModel'
 
-export class DayModel extends ForecastModel {
-
-}
+export class DayModel extends ForecastModel {}

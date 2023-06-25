@@ -1,8 +1,8 @@
 export type CitySearchType = {
-    name: string
-    latitude: number
-    longitude: number
-    country: string
-    population: number
-    is_capital: boolean
+  name: string
+  latitude: number
+  longitude: number
+  country: string
+  population: number
+  is_capital: boolean
 }

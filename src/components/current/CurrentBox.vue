@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import CurrentWeather from "@/components/current/CurrentWeather.vue";
-import CurrentDetailsList from "@/components/current/CurrentDetailsList.vue";
-import CurrentIcon from "@/components/current/CurrentIcon.vue";
-import {useForecastStore} from "@/stores/forecast";
-import {storeToRefs} from "pinia";
-import {computed} from "vue";
+import CurrentWeather from '@/components/current/CurrentWeather.vue'
+import CurrentDetailsList from '@/components/current/CurrentDetailsList.vue'
+import CurrentIcon from '@/components/current/CurrentIcon.vue'
+import { useForecastStore } from '@/stores/forecast'
+import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 
 const useForecast = useForecastStore()
-const {current} = storeToRefs(useForecast)
+const { current } = storeToRefs(useForecast)
 
 const details = computed(() => {
   const details = []
@@ -16,22 +16,24 @@ const details = computed(() => {
     'Sensação ' + round(current.value.temperatureApparent) + '°C',
     'Vento ' + round(current.value.windSpeed ?? 0) + ' km/h',
     'Umidade ' + round(current.value.humidity) + '%',
-    'Chance de chuva ' + round(current.value.precipitationProbability) + '%',
+    'Chance de chuva ' + round(current.value.precipitationProbability) + '%'
   ]
 
   for (let id = 0; id < fields.length; id++) {
-    details.push({id, text: fields[id]})
+    details.push({ id, text: fields[id] })
   }
 
   return details
 })
 
-function round(number: number|null|undefined) {
+function round(number: number | null | undefined) {
   return Math.round(number ?? 0)
 }
 
 const sunMoon = computed(() => {
-  return current.value.startTime?.isBetween(current.value.sunriseTime, current.value.sunsetTime) ? 0 : 1
+  return current.value.startTime?.isBetween(current.value.sunriseTime, current.value.sunsetTime)
+    ? 0
+    : 1
 })
 </script>
 
@@ -39,19 +41,17 @@ const sunMoon = computed(() => {
   <section class="w-full">
     <div class="w-10/12 lg:w-8/12 mx-auto flex flex-col items-center gap-2 lg:gap-4">
       <CurrentIcon
-          :code="current.weatherCode"
-          :sun-moon="sunMoon"
-          :description="`Ícone de ${current.description}`"
+        :code="current.weatherCode"
+        :sun-moon="sunMoon"
+        :description="`Ícone de ${current.description}`"
       />
 
       <CurrentWeather
-          :description="`${current.description}`"
-          :temperature="round(current.temperature)"
+        :description="`${current.description}`"
+        :temperature="round(current.temperature)"
       />
 
-      <CurrentDetailsList
-          :details="details"
-      />
+      <CurrentDetailsList :details="details" />
     </div>
   </section>
 </template>

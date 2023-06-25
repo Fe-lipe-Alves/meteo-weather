@@ -4,6 +4,7 @@ const cor = 'rgba(239,239,239,0.71)';
 
 
 /** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line no-undef
 module.exports = {
   content: [
     "./index.html",

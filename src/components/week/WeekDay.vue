@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type {DayModel} from "@/models/DayModel";
-import {computed} from "vue";
-import 'moment/locale/pt-br';
-import IconItem from "@/components/IconItem.vue";
+import type { DayModel } from '@/models/DayModel'
+import { computed } from 'vue'
+import 'moment/locale/pt-br'
+import IconItem from '@/components/IconItem.vue'
 
 const size = 36
 
@@ -20,10 +20,10 @@ const dayName = computed(() => {
     sameElse: 'DD/MM/YYYY'
   })
 
-  return day ? day.charAt(0).toUpperCase() + day.slice(1) : '';
+  return day ? day.charAt(0).toUpperCase() + day.slice(1) : ''
 })
 
-function round(number: number|null|undefined) {
+function round(number: number | null | undefined) {
   return Math.round(number ?? 0)
 }
 </script>
@@ -33,11 +33,11 @@ function round(number: number|null|undefined) {
     <span>{{ dayName }}</span>
     <div class="flex-1 flex items-end">
       <IconItem
-          type="small"
-          :size="size"
-          :weather-code="day.weatherCode"
-          :description="day.description"
-          :sun-moon="0"
+        type="small"
+        :size="size"
+        :weather-code="day.weatherCode"
+        :description="day.description"
+        :sun-moon="0"
       />
     </div>
     <div class="flex gap-2">
@@ -48,6 +48,4 @@ function round(number: number|null|undefined) {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

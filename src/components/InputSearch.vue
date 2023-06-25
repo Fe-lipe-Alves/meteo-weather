@@ -1,28 +1,28 @@
 <template>
   <div
-      class="lg:w-96 pb-2 rounded-[1.4rem] relative"
-      :class="{'rounded-b-none bg-cultured': isFocusAndNotEmpty}"
-      @focusin="setFocus(true)"
+    class="lg:w-96 pb-2 rounded-[1.4rem] relative"
+    :class="{ 'rounded-b-none bg-cultured': isFocusAndNotEmpty }"
+    @focusin="setFocus(true)"
   >
     <input
-        type="text"
-        autocomplete="off"
-        class="w-full rounded-[1.4rem] shadow px-8 py-2 text-center text-lg focus:outline-none bg-cultured/70"
-        :class="{'bg-white': isFocus}"
-        :value="search"
-        @input="runSearch"
-    >
+      type="text"
+      autocomplete="off"
+      class="w-full rounded-[1.4rem] shadow px-8 py-2 text-center text-lg focus:outline-none bg-cultured/70"
+      :class="{ 'bg-white': isFocus }"
+      :value="search"
+      @input="runSearch"
+    />
 
     <div
-        class="w-full mt-2 list bg-inherit absolute rounded-b-[1.4rem] overflow-hidden z-10"
-        v-show="isFocusAndNotEmpty"
+      class="w-full mt-2 list bg-inherit absolute rounded-b-[1.4rem] overflow-hidden z-10"
+      v-show="isFocusAndNotEmpty"
     >
       <ul>
         <li
-            class="px-5 lg:px-8 py-2 text-sm hover:bg-white truncate"
-            v-for="(city, index) in cities"
-            :key="index"
-            @click="selectCity(city)"
+          class="px-5 lg:px-8 py-2 text-sm hover:bg-white truncate"
+          v-for="(city, index) in cities"
+          :key="index"
+          @click="selectCity(city)"
         >
           {{ city.name }}, {{ city.country }}
         </li>
@@ -32,16 +32,16 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, ref, watch} from "vue";
-import {useIpInfoStore} from "@/stores/ipInfos";
-import {storeToRefs} from "pinia";
-import {getTimezoneCity, searchCity} from "@/services/citiesSearch";
-import type {CitySearchType} from "@/types/CitySearchType";
-import {useForecastStore} from "@/stores/forecast";
+import { computed, ref, watch } from 'vue'
+import { useIpInfoStore } from '@/stores/ipInfos'
+import { storeToRefs } from 'pinia'
+import { getTimezoneCity, searchCity } from '@/services/citiesSearch'
+import type { CitySearchType } from '@/types/CitySearchType'
+import { useForecastStore } from '@/stores/forecast'
 
 const useForecast = useForecastStore()
 const useIpInfo = useIpInfoStore()
-const {ipInfo} = storeToRefs(useIpInfo)
+const { ipInfo } = storeToRefs(useIpInfo)
 
 const cities = ref<CitySearchType[]>([])
 const isFocus = ref(false)
@@ -51,11 +51,11 @@ const isFocusAndNotEmpty = computed(() => {
   return isFocus.value && cities.value.length
 })
 
-function setFocus(value) {
+function setFocus(value: boolean) {
   isFocus.value = value
 }
 
-async function runSearch(event) {
+async function runSearch(event: any) {
   const text = event.target.value
 
   if (text.length > 3) {
@@ -71,7 +71,7 @@ async function selectCity(city: CitySearchType) {
   console.log(useForecast.current)
 }
 
-async function searchForecast(latitude, longitude, timezone) {
+async function searchForecast(latitude: number, longitude: number, timezone: any) {
   try {
     await useForecast.loadWeather(latitude, longitude, timezone)
   } catch (error) {
@@ -80,11 +80,12 @@ async function searchForecast(latitude, longitude, timezone) {
   }
 }
 
-watch(() => ipInfo.value.infos.city, () => {
-  search.value = ipInfo.value.infos.city + ', ' + ipInfo.value.infos.countryCode
-})
+watch(
+  () => ipInfo.value.infos.city,
+  () => {
+    search.value = ipInfo.value.infos.city + ', ' + ipInfo.value.infos.countryCode
+  }
+)
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

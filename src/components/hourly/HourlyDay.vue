@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import HourlyHour from "@/components/hourly/HourlyHour.vue";
-import {computed} from "vue";
-import type {HourModel} from "@/models/HourModel";
-import 'moment/locale/pt-br';
+import HourlyHour from '@/components/hourly/HourlyHour.vue'
+import { computed } from 'vue'
+import type { HourModel } from '@/models/HourModel'
+import 'moment/locale/pt-br'
 
 const props = defineProps<{
   day: HourModel[]
@@ -18,7 +18,7 @@ const dayName = computed(() => {
     sameElse: 'DD/MM/YYYY'
   })
 
-  return day ? day.charAt(0).toUpperCase() + day.slice(1) : '';
+  return day ? day.charAt(0).toUpperCase() + day.slice(1) : ''
 })
 </script>
 
@@ -29,16 +29,14 @@ const dayName = computed(() => {
     </div>
     <div class="flex divide-x divide-gray-300">
       <HourlyHour
-          v-for="(hour, index) in day"
-          :key="hour"
-          :hour="hour"
-          :loading-icon="index < 20 ? 'loading' : 'lazy'"
-          class="w-fit px-2 flex flex-col items-center"
+        v-for="(hour, index) in day"
+        :key="hour.startTime.toISOString()"
+        :hour="hour"
+        :loading-icon="index < 20 ? 'loading' : 'lazy'"
+        class="w-fit px-2 flex flex-col items-center"
       />
     </div>
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

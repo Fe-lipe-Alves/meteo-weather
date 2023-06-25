@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import IconItem from "@/components/IconItem.vue";
-import {useForecastStore} from "@/stores/forecast";
-import {storeToRefs} from "pinia";
+import IconItem from '@/components/IconItem.vue'
+import { useForecastStore } from '@/stores/forecast'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps<{
   code: number
-  sunMoon: 0|1
+  sunMoon: 0 | 1
   description: string
 }>()
 
 const size = 144
 
 const useForecast = useForecastStore()
-const {loading} = storeToRefs(useForecast)
+const { loading } = storeToRefs(useForecast)
 </script>
 
 <template>
   <div
-      class="icon-box bg-slate-50/25 rounded-full p-4 flex justify-center items-center"
-      :class="{'loading-circle': loading}"
-      :title="description"
+    class="icon-box bg-slate-50/25 rounded-full p-4 flex justify-center items-center"
+    :class="{ 'loading-circle': loading }"
+    :title="description"
   >
     <IconItem
-        class="drop-shadow-4xl"
-        type="large"
-        v-if="!loading"
-        :size="size"
-        :weather-code="code"
-        :description="description"
-        :sun-moon="sunMoon"
+      class="drop-shadow-4xl"
+      type="large"
+      v-if="!loading"
+      :size="size"
+      :weather-code="code"
+      :description="description"
+      :sun-moon="sunMoon"
     />
   </div>
 </template>
@@ -46,11 +46,15 @@ const {loading} = storeToRefs(useForecast)
   border: 3px solid transparent;
   border-top: 3px solid #ffffff;
   border-radius: 50%;
-  animation: spin .5s linear infinite;
+  animation: spin 0.5s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
