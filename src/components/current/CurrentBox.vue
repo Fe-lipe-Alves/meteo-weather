@@ -2,12 +2,18 @@
 import CurrentWeather from '@/components/current/CurrentWeather.vue'
 import CurrentDetailsList from '@/components/current/CurrentDetailsList.vue'
 import CurrentIcon from '@/components/current/CurrentIcon.vue'
-import { useForecastStore } from '@/stores/forecast'
+import { useForecastStore } from '@/stores/forecastStore'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
+import {useGlobalStore} from "@/stores/globalStore";
 
+const useGlobal = useGlobalStore()
 const useForecast = useForecastStore()
-const { current } = storeToRefs(useForecast)
+const { timelines } = storeToRefs(useForecast)
+
+const current = computed(() => {
+  return timelines.value.current
+})
 
 const details = computed(() => {
   const details = []
@@ -29,12 +35,6 @@ const details = computed(() => {
 function round(number: number | null | undefined) {
   return Math.round(number ?? 0)
 }
-
-const sunMoon = computed(() => {
-  return current.value.startTime?.isBetween(current.value.sunriseTime, current.value.sunsetTime)
-    ? 0
-    : 1
-})
 </script>
 
 <template>
@@ -42,7 +42,7 @@ const sunMoon = computed(() => {
     <div class="w-10/12 lg:w-8/12 mx-auto flex flex-col items-center gap-2 lg:gap-4">
       <CurrentIcon
         :code="current.weatherCode"
-        :sun-moon="sunMoon"
+        :sun-moon="useGlobal.sunMoon(current)"
         :description="`Ícone de ${current.description}`"
       />
 

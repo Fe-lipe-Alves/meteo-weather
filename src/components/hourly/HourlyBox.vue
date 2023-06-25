@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import HourlyGroupDay from '@/components/hourly/HourlyGroupDay.vue'
-import { useForecastStore } from '@/stores/forecast'
+import { useForecastStore } from '@/stores/forecastStore'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import type { HourModel } from '@/models/HourModel'
 
 const useForecast = useForecastStore()
-const { hourly } = storeToRefs(useForecast)
+const { timelines } = storeToRefs(useForecast)
+
+const hours = computed(() => {
+  return timelines.value.hours
+})
 
 const days = computed(() => {
   const _days: { [key: string]: HourModel[] } = {}
 
-  hourly.value.map((hour) => {
+  hours.value.map((hour) => {
     const consult = hour.startTime?.clone()?.startOf('day').format('YYYY-MM-DD')
 
     if (_days[consult]) {

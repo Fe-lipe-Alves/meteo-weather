@@ -1,3 +1,3 @@
 export async function consultInfoIp() {
-  return await fetch('http://ip-api.com/json').then((response) => response.json())
+  return await fetch('https://ipinfo.io?token=760d42e002d21f').then((response) => response.json())
 }

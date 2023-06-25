@@ -21,15 +21,17 @@ export abstract class ForecastModel {
   public windSpeed: number
   public description: string
 
-  public constructor(data: any) {
-    Object.assign(this, data)
+  public constructor(data?: any) {
+    if (data) {
+      Object.assign(this, data)
 
-    this.startTime = moment(data.startTime)
-    this.sunsetTime = moment(data.sunsetTime)
-    this.sunriseTime = moment(data.sunriseTime)
+      this.startTime = moment(data.startTime)
+      this.sunsetTime = moment(data.sunsetTime)
+      this.sunriseTime = moment(data.sunriseTime)
 
-    if (this.weatherCode) {
-      this.description = descriptions[this.weatherCode]
+      if (this.weatherCode) {
+        this.description = descriptions[this.weatherCode]
+      }
     }
   }
 }

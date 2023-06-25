@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useForecastStore } from '@/stores/forecast'
+import { useForecastStore } from '@/stores/forecastStore'
 import { storeToRefs } from 'pinia'
 
 const props = defineProps<{

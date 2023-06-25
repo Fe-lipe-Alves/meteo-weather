@@ -1,7 +1,7 @@
 <template>
   <div
     class="container min-w-full min-h-screen"
-    :style="`--background-image: url('${dataImage}');--background-color:${colorImage}`"
+    :style="backgroundImageUnsplash"
   >
     <HeaderPage />
 
@@ -21,67 +21,41 @@ import HourlyBox from '@/components/hourly/HourlyBox.vue'
 import CurrentBox from '@/components/current/CurrentBox.vue'
 import WeekBox from '@/components/week/WeekBox.vue'
 import FooterPage from '@/components/FooterPage.vue'
-import { onBeforeMount, ref, watch } from 'vue'
-import { useBackgroundImageStore } from '@/stores/backgroundImage'
-import { storeToRefs } from 'pinia'
-import { useForecastStore } from '@/stores/forecast'
-import { useIpInfoStore } from '@/stores/ipInfos'
+import {onBeforeMount} from 'vue'
+import {storeToRefs} from 'pinia'
+import {useUnsplashStore} from '@/stores/unsplashStore'
+import {useForecastStore} from '@/stores/forecastStore'
+import {useIpInfoStore} from '@/stores/ipInfos'
+import {useGlobalStore} from "@/stores/globalStore";
 
-// Stores
-const useBackgroundImage = useBackgroundImageStore()
+const useGlobal = useGlobalStore()
+const useUnsplash = useUnsplashStore()
+const {backgroundImageUnsplash} = storeToRefs(useUnsplash)
 const useIpInfo = useIpInfoStore()
 const { ipInfo } = storeToRefs(useIpInfo)
 const useForecast = useForecastStore()
 const { loading } = storeToRefs(useForecast)
 
-const dataImage = ref('LME4P+xs9aNG0gkCxtoz4nIr%1of')
-const colorImage = ref('')
-const imageLoadHidden = ref(null)
-
 async function getLocationFromBrowser() {
-  const permission =
-    navigator.permissions &&
+  const permission = navigator.permissions &&
     (await navigator.permissions.query({ name: 'geolocation' })).state === 'granted'
 
   if (!navigator.geolocation || !permission) {
-    await consultIp()
+    await useIpInfo.loadInfos()
+    const [lat, lon] = ipInfo.value.infos.loc.split(',').map(item => parseInt(item))
+    await useGlobal.searchForecast(lat, lon, ipInfo.value.infos.timezone)
   }
 
   navigator.geolocation.getCurrentPosition(async (position) => {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
-    await searchForecast(position.coords.latitude, position.coords.longitude, timezone)
+    await useGlobal.searchForecast(position.coords.latitude, position.coords.longitude, timezone)
   })
 }
 
-async function consultIp() {
-  await useIpInfo.loadInfos()
-  await searchForecast(ipInfo.value.infos.lat, ipInfo.value.infos.lon, ipInfo.value.infos.timezone)
-}
-
-async function searchForecast(latitude: number, longitude: number, timezone: string) {
-  try {
-    await useForecast.loadWeather(latitude, longitude, timezone)
-  } catch (error) {
-    console.log('TEVE UM ERRO')
-  }
-}
-
-watch(loading, (newValue) => {
-  if (!newValue) {
-    dataImage.value = useBackgroundImage.realImage()
-  }
-})
-
 onBeforeMount(async () => {
   loading.value = true
-
-  await useBackgroundImage.load()
-
-  dataImage.value = useBackgroundImage.getBlurImageUrl()
-  colorImage.value = useBackgroundImage.getColorImage()
-
+  await useUnsplash.load()
   await getLocationFromBrowser()
-
   loading.value = false
 })
 </script>
@@ -89,8 +63,7 @@ onBeforeMount(async () => {
 <style lang="scss" scoped>
 .container {
   --bg-subcolor: rgba(134, 134, 134, 0.3);
-  background-image: linear-gradient(0deg, var(--bg-subcolor), var(--bg-subcolor)),
-    var(--background-image);
+  background-image: linear-gradient(0deg, var(--bg-subcolor), var(--bg-subcolor)), var(--background-image);
   background-color: var(--background-color);
   background-position: top;
   background-size: cover;
