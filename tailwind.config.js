@@ -1,6 +1,10 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
 
+const cor = 'rgba(239,239,239,0.71)';
+
+
 /** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line no-undef
 module.exports = {
   content: [
     "./index.html",
@@ -15,7 +19,13 @@ module.exports = {
         ...defaultTheme.colors
       },
       fontFamily: {
-        'sans': ['Raleway', ...defaultTheme.fontFamily.sans],
+        'sans': ['Montserrat', ...defaultTheme.fontFamily.sans],
+      },
+      dropShadow: {
+        '4xl': [
+          '0 20px 20px '+cor,
+          '0 60px 60px rgba(40, 40, 40, 0.2)',
+        ]
       }
     },
   },

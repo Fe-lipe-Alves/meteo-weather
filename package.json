@@ -13,7 +13,14 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@pdf-lib/upng": "^1.0.1",
+    "base64-arraybuffer": "^1.0.2",
+    "blurhash": "^2.0.5",
+    "blurhash-to-css": "^0.5.5",
+    "moment": "^2.29.4",
     "pinia": "^2.0.35",
+    "text-encoding": "^0.7.0",
+    "unsplash-js": "^7.0.18",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
