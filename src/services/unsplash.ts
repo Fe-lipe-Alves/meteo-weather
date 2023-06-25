@@ -9,6 +9,7 @@ export async function getRandomImage(description: string = '') {
         query: description,
         count: 1,
     }).then(response => {
+        // @ts-ignore
         return response.response[0] ?? {}
     })
     //

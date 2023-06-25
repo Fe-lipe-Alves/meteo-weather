@@ -54,7 +54,9 @@ import {storeToRefs} from 'pinia'
 import {getTimezoneCity, searchCity} from '@/services/citiesSearch'
 import type {CitySearchType} from '@/types/CitySearchType'
 import {useForecastStore} from '@/stores/forecastStore'
+import {useGlobalStore} from "@/stores/globalStore";
 
+const useGlobal = useGlobalStore()
 const useForecast = useForecastStore()
 const {loading} = storeToRefs(useForecast)
 const useIpInfo = useIpInfoStore()
@@ -83,23 +85,10 @@ async function runSearch(event: any) {
 async function selectCity(city: CitySearchType) {
   setFocus(false)
   loading.value = true
-
   search.value = city.name + ', ' + city.country
-
   const timezone = await getTimezoneCity(city.name)
-
-  await searchForecast(city.latitude, city.longitude, timezone.timezone)
-  setTimeout(() => {
-    loading.value = false
-  }, 2000)
-}
-
-async function searchForecast(latitude: number, longitude: number, timezone: any) {
-  try {
-    await useForecast.loadWeather(latitude, longitude, timezone)
-  } catch (error) {
-    console.log('TEVE UM ERRO')
-  }
+  await useGlobal.searchForecast(city.latitude, city.longitude, timezone.timezone)
+  loading.value = false
 }
 
 watch(
