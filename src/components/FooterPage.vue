@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-import {useBackgroundImageStore} from "@/stores/backgroundImage";
+import {useUnsplashStore} from "@/stores/unsplashStore";
 import {storeToRefs} from "pinia";
 
-const useBackgroundImage = useBackgroundImageStore()
-const {image} = storeToRefs(useBackgroundImage)
+const useUnsplash = useUnsplashStore()
+const {unsplash} = storeToRefs(useUnsplash)
 </script>
 
 <template>
@@ -16,10 +16,10 @@ const {image} = storeToRefs(useBackgroundImage)
     <p>
       Imagem
       <a
-          :href="image.unsplash.user.links.html"
+          :href="unsplash.image.user.links.html"
          target="_blank"
       >
-        {{ image.unsplash.user.name }}
+        {{ unsplash.image.user.name }}
       </a>
       por
       <a

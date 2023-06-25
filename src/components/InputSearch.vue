@@ -53,7 +53,7 @@ import {useIpInfoStore} from '@/stores/ipInfos'
 import {storeToRefs} from 'pinia'
 import {getTimezoneCity, searchCity} from '@/services/citiesSearch'
 import type {CitySearchType} from '@/types/CitySearchType'
-import {useForecastStore} from '@/stores/forecast'
+import {useForecastStore} from '@/stores/forecastStore'
 
 const useForecast = useForecastStore()
 const {loading} = storeToRefs(useForecast)
