@@ -22,7 +22,6 @@ export const useBackgroundImageStore = defineStore('backgroundImage', () => {
   }
 
   function realImage() {
-    console.log(image.value.unsplash.urls.regular)
     return image.value.unsplash.urls.regular
   }
 

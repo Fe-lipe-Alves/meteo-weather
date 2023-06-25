@@ -1,7 +1,7 @@
 <template>
   <div
     class="container min-w-full min-h-screen"
-    :style="`--background-image: url('${dataImage}');--background-color:${colorImage}`"
+    :style="styleBackground"
   >
     <HeaderPage />
 
@@ -21,7 +21,7 @@ import HourlyBox from '@/components/hourly/HourlyBox.vue'
 import CurrentBox from '@/components/current/CurrentBox.vue'
 import WeekBox from '@/components/week/WeekBox.vue'
 import FooterPage from '@/components/FooterPage.vue'
-import { onBeforeMount, ref, watch } from 'vue'
+import {computed, onBeforeMount, ref, watch} from 'vue'
 import { useBackgroundImageStore } from '@/stores/backgroundImage'
 import { storeToRefs } from 'pinia'
 import { useForecastStore } from '@/stores/forecast'
@@ -32,11 +32,16 @@ const useBackgroundImage = useBackgroundImageStore()
 const useIpInfo = useIpInfoStore()
 const { ipInfo } = storeToRefs(useIpInfo)
 const useForecast = useForecastStore()
-const { loading } = storeToRefs(useForecast)
+const { loading, current } = storeToRefs(useForecast)
 
-const dataImage = ref('LME4P+xs9aNG0gkCxtoz4nIr%1of')
+const dataImage = ref('')
 const colorImage = ref('')
-const imageLoadHidden = ref(null)
+
+const styleBackground = computed(() => {
+  const image = dataImage.value.length ? `--background-image: url('${dataImage.value}')` : ''
+  const color = `;--background-color:${colorImage.value}`
+  return image+color;
+})
 
 async function getLocationFromBrowser() {
   const permission =
@@ -55,7 +60,8 @@ async function getLocationFromBrowser() {
 
 async function consultIp() {
   await useIpInfo.loadInfos()
-  await searchForecast(ipInfo.value.infos.lat, ipInfo.value.infos.lon, ipInfo.value.infos.timezone)
+  const [lat, lon] = ipInfo.value.infos.loc.split(',').map(item => parseInt(item))
+  await searchForecast(lat, lon, ipInfo.value.infos.timezone)
 }
 
 async function searchForecast(latitude: number, longitude: number, timezone: string) {
@@ -66,10 +72,28 @@ async function searchForecast(latitude: number, longitude: number, timezone: str
   }
 }
 
+function changeHeaders() {
+  const link = document.querySelector("link[rel~='icon']");
+  const code = current.value.weatherCode
+  let sunMoon = current.value.startTime?.isBetween(current.value.sunriseTime, current.value.sunsetTime) ? 0 : 1
+
+  const dontExists = [1001, 4000, 4200]
+  if (dontExists.indexOf(code) > -1) {
+    sunMoon = 0
+  }
+
+  link.href = `/tomorrow-icons/v2/small/png/${code}${sunMoon}_small.png`;
+  document.title = current.value.description + ' - MeteoWeather'
+}
+
 watch(loading, (newValue) => {
   if (!newValue) {
     dataImage.value = useBackgroundImage.realImage()
   }
+})
+
+watch(() => current.value.weatherCode, () => {
+  changeHeaders()
 })
 
 onBeforeMount(async () => {
