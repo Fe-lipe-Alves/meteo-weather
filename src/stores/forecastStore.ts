@@ -1,6 +1,6 @@
 import {defineStore, storeToRefs} from 'pinia'
 import {HourModel} from '@/models/HourModel'
-import {reactive, ref, toRaw, toRefs, watch} from 'vue'
+import {reactive, ref, toRaw, watch} from 'vue'
 import {CurrentModel} from '@/models/CurrentModel'
 import {getForecastData} from '@/services/tomorrow'
 import {DayModel} from '@/models/DayModel'

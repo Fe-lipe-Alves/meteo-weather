@@ -26,12 +26,10 @@ import {storeToRefs} from 'pinia'
 import {useUnsplashStore} from '@/stores/unsplashStore'
 import {useForecastStore} from '@/stores/forecastStore'
 import {useLocationStore} from '@/stores/locationStore'
-import {useGlobalStore} from "@/stores/globalStore";
-const useGlobal = useGlobalStore()
+
 const useUnsplash = useUnsplashStore()
 const {backgroundImageUnsplash} = storeToRefs(useUnsplash)
 const useLocation = useLocationStore()
-const { location } = storeToRefs(useLocation)
 const useForecast = useForecastStore()
 const { loading } = storeToRefs(useForecast)
 

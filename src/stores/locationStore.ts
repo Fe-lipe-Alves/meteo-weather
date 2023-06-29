@@ -2,7 +2,6 @@ import {defineStore} from 'pinia'
 import {reactive} from 'vue'
 import {consultInfoIp} from '@/services/consultInfoIp'
 import {LocationModel} from "@/models/LocationModel";
-import {reverseGeocoding} from "@/services/citiesSearch";
 import {currentTimezone, offsetToTimezone} from "@/utilities/helpers";
 // @ts-ignore
 import {} from "googlemaps"

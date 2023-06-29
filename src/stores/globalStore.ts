@@ -1,7 +1,6 @@
 import {defineStore, storeToRefs} from "pinia";
-import {computed, ref} from "vue";
+import {ref} from "vue";
 import {useForecastStore} from "@/stores/forecastStore";
-import type {IntervalType} from "@/types/IntervalType";
 import {pathToIcon} from "@/utilities/helpers";
 
 export const useGlobalStore = defineStore('global', () => {

@@ -79,7 +79,7 @@ async function runSearch(event: any) {
   }
 }
 
-async function selectCity(city) {
+async function selectCity(city: { description: string, id: string }) {
   setFocus(false)
   loading.value = true
 
