@@ -19,14 +19,14 @@
         class="w-full mt-2 list bg-inherit absolute rounded-b-[1.4rem] overflow-hidden z-10"
         v-show="isFocus"
     >
-      <ul v-if="cities.length">
+      <ul v-if="autocompleteOptions.length">
         <li
             class="px-5 lg:px-8 py-2 text-sm hover:bg-white truncate cursor-default"
-            v-for="(city, index) in cities"
-            :key="index"
+            v-for="city in autocompleteOptions"
+            :key="city.id"
             @click="selectCity(city)"
         >
-          {{ city.name }}, {{ city.country }}
+          {{ city.description }}
         </li>
       </ul>
 
@@ -49,20 +49,15 @@
 
 <script lang="ts" setup>
 import {ref, watch} from 'vue'
-import {useIpInfoStore} from '@/stores/ipInfos'
+import {useLocationStore} from '@/stores/locationStore'
 import {storeToRefs} from 'pinia'
-import {getTimezoneCity, searchCity} from '@/services/citiesSearch'
-import type {CitySearchType} from '@/types/CitySearchType'
 import {useForecastStore} from '@/stores/forecastStore'
-import {useGlobalStore} from "@/stores/globalStore";
 
-const useGlobal = useGlobalStore()
 const useForecast = useForecastStore()
 const {loading} = storeToRefs(useForecast)
-const useIpInfo = useIpInfoStore()
-const {ipInfo} = storeToRefs(useIpInfo)
+const useLocation = useLocationStore()
+const {location, autocompleteOptions} = storeToRefs(useLocation)
 
-const cities = ref<CitySearchType[]>([])
 const isFocus = ref(false)
 const search = ref('')
 const loadingSuggestions = ref(false)
@@ -77,24 +72,27 @@ async function runSearch(event: any) {
 
   if (text.length > 3) {
     loadingSuggestions.value = true
-    cities.value = await searchCity(text)
+    await useLocation.searchAutocomplete(text)
     loadingSuggestions.value = false
+  } else {
+    useLocation.clearAutocomplete()
   }
 }
 
-async function selectCity(city: CitySearchType) {
+async function selectCity(city: { description: string, id: string }) {
   setFocus(false)
   loading.value = true
-  search.value = city.name + ', ' + city.country
-  const timezone = await getTimezoneCity(city.name)
-  await useGlobal.searchForecast(city.latitude, city.longitude, timezone.timezone)
+
+  await useLocation.searchLocation(city.id)
+  await useForecast.load(location.value.latitude, location.value.longitude, location.value.timezone)
+
   loading.value = false
 }
 
 watch(
-    () => ipInfo.value.infos.city,
+    () => location.value.address,
     () => {
-      search.value = ipInfo.value.infos.city + ', ' + ipInfo.value.infos.country
+      search.value = location.value.address
     }
 )
 </script>

@@ -9,7 +9,7 @@ import {useGlobalStore} from "@/stores/globalStore";
 
 const useGlobal = useGlobalStore()
 const useForecast = useForecastStore()
-const { timelines } = storeToRefs(useForecast)
+const { timelines, loading } = storeToRefs(useForecast)
 
 const current = computed(() => {
   return timelines.value.current
@@ -41,7 +41,7 @@ function round(number: number | null | undefined) {
   <section class="w-full">
     <div class="w-10/12 lg:w-8/12 mx-auto flex flex-col items-center gap-2 lg:gap-4">
       <CurrentIcon
-        :code="current.weatherCode"
+        :code="+current.weatherCode"
         :sun-moon="useGlobal.sunMoon(current)"
         :description="`Ícone de ${current.description}`"
       />
@@ -51,7 +51,7 @@ function round(number: number | null | undefined) {
         :temperature="round(current.temperature)"
       />
 
-      <CurrentDetailsList :details="details" />
+      <CurrentDetailsList :details="details" v-if="!loading" />
     </div>
   </section>
 </template>
