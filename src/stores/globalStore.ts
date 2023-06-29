@@ -2,6 +2,7 @@ import {defineStore, storeToRefs} from "pinia";
 import {computed, ref} from "vue";
 import {useForecastStore} from "@/stores/forecastStore";
 import type {IntervalType} from "@/types/IntervalType";
+import {pathToIcon} from "@/utilities/helpers";
 
 export const useGlobalStore = defineStore('global', () => {
   const useForecast = useForecastStore()
@@ -19,11 +20,7 @@ export const useGlobalStore = defineStore('global', () => {
     const link: HTMLLinkElement | null = document.querySelector("link[rel~='icon']");
 
     if (link) {
-      const code = current.weatherCode
-      const dontExists = [1001, 4000, 4200]
-      const sunMoon = (current.startTime?.isBetween(current.sunriseTime, current.sunsetTime)
-        || dontExists.indexOf(code) > -1) ? 0 : 1
-      link.href = `/tomorrow-icons/v2/small/png/${code}${sunMoon}_small.png`;
+      link.href = pathToIcon(current.weatherCode, current)
     }
 
     document.title = current.description + ' - MeteoWeather'

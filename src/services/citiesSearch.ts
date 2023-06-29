@@ -19,3 +19,7 @@ export async function searchCity(text: string) {
 export async function getTimezoneCity(cityName: string) {
   return await request(`timezone?city=${cityName}`)
 }
+
+export async function reverseGeocoding(lat: number, lon: number) {
+  return await request(`reversegeocoding?lat=${lat}&lon=${lon}`)
+}

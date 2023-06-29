@@ -7,8 +7,8 @@
 
     <main class="flex flex-col gap-8 py-8">
       <CurrentBox />
-      <HourlyBox />
-      <WeekBox />
+      <HourlyBox v-if="!loading" />
+      <WeekBox v-if="!loading" />
     </main>
 
     <FooterPage />
@@ -25,14 +25,13 @@ import {onBeforeMount} from 'vue'
 import {storeToRefs} from 'pinia'
 import {useUnsplashStore} from '@/stores/unsplashStore'
 import {useForecastStore} from '@/stores/forecastStore'
-import {useIpInfoStore} from '@/stores/ipInfos'
+import {useLocationStore} from '@/stores/locationStore'
 import {useGlobalStore} from "@/stores/globalStore";
-
 const useGlobal = useGlobalStore()
 const useUnsplash = useUnsplashStore()
 const {backgroundImageUnsplash} = storeToRefs(useUnsplash)
-const useIpInfo = useIpInfoStore()
-const { ipInfo } = storeToRefs(useIpInfo)
+const useLocation = useLocationStore()
+const { location } = storeToRefs(useLocation)
 const useForecast = useForecastStore()
 const { loading } = storeToRefs(useForecast)
 
@@ -41,14 +40,11 @@ async function getLocationFromBrowser() {
     (await navigator.permissions.query({ name: 'geolocation' })).state === 'granted'
 
   if (!navigator.geolocation || !permission) {
-    await useIpInfo.loadInfos()
-    const [lat, lon] = ipInfo.value.infos.loc.split(',').map(item => parseInt(item))
-    await useGlobal.searchForecast(lat, lon, ipInfo.value.infos.timezone)
+    await useLocation.loadFromIp()
   }
 
   navigator.geolocation.getCurrentPosition(async (position) => {
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
-    await useGlobal.searchForecast(position.coords.latitude, position.coords.longitude, timezone)
+    await useLocation.getLocationFromCoordinates(position.coords.latitude, position.coords.longitude)
   })
 }
 
