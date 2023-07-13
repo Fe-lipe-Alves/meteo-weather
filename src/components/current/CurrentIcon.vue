@@ -24,7 +24,7 @@ const { loading } = storeToRefs(useForecast)
     <IconItem
       class="drop-shadow-4xl"
       type="large"
-      v-if="!loading"
+      v-if="!loading && !isNaN(code)"
       :size="size"
       :weather-code="code"
       :description="description"

@@ -16,10 +16,10 @@ const {unsplash} = storeToRefs(useUnsplash)
     <p>
       Imagem
       <a
-          :href="unsplash.image.user.links.html"
+          :href="unsplash.image.user?.links.html"
          target="_blank"
       >
-        {{ unsplash.image.user.name }}
+        {{ unsplash.image.user?.name }}
       </a>
       por
       <a
