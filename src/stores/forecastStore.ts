@@ -7,12 +7,14 @@ import {DayModel} from '@/models/DayModel'
 import {useGlobalStore} from "@/stores/globalStore";
 import moment from "moment/moment";
 import {useLocationStore} from "@/stores/locationStore";
+import {useUnsplashStore} from "@/stores/unsplashStore";
 
 export const useForecastStore = defineStore('forecast', () => {
   const useGlobal = useGlobalStore()
   const {error} = storeToRefs(useGlobal)
   const useLocation = useLocationStore()
   const {location} = storeToRefs(useLocation)
+  const useUnsplash = useUnsplashStore()
 
   const timelines = reactive({
     hours: new Array<HourModel>(),
@@ -22,6 +24,7 @@ export const useForecastStore = defineStore('forecast', () => {
 
   watch(() => Object.assign({}, location.value), async() => {
     await load(location.value.latitude, location.value.longitude, location.value.timezone)
+    await useUnsplash.load(timelines.current.description)
   })
 
   const loading = ref<boolean>(false)
@@ -54,8 +57,6 @@ export const useForecastStore = defineStore('forecast', () => {
 
       forecast.hourly.map((hour: HourModel) => timelines.hours.push(new HourModel(hour)))
       forecast.daily.map((day: DayModel) => timelines.days.push(new DayModel(day)))
-
-      useGlobal.changeHeaderPage()
     } else {
       error.value = true
     }
