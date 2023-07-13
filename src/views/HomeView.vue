@@ -2,6 +2,7 @@
   <div
     class="container min-w-full min-h-screen"
     :style="backgroundImageUnsplash"
+    v-show="!building"
   >
     <HeaderPage />
 
@@ -21,7 +22,7 @@ import HourlyBox from '@/components/hourly/HourlyBox.vue'
 import CurrentBox from '@/components/current/CurrentBox.vue'
 import WeekBox from '@/components/week/WeekBox.vue'
 import FooterPage from '@/components/FooterPage.vue'
-import {onBeforeMount} from 'vue'
+import {onBeforeMount, ref, watch} from 'vue'
 import {storeToRefs} from 'pinia'
 import {useUnsplashStore} from '@/stores/unsplashStore'
 import {useForecastStore} from '@/stores/forecastStore'
@@ -32,6 +33,8 @@ const {backgroundImageUnsplash} = storeToRefs(useUnsplash)
 const useLocation = useLocationStore()
 const useForecast = useForecastStore()
 const { loading } = storeToRefs(useForecast)
+
+const building = ref(true)
 
 async function getLocationFromBrowser() {
   const permission = navigator.permissions &&
@@ -49,7 +52,18 @@ async function getLocationFromBrowser() {
 onBeforeMount(async () => {
   loading.value = true
   await getLocationFromBrowser()
-  loading.value = false
+})
+
+watch(() => loading.value, (newValue) => {
+  if (!newValue) {
+    const splash = document.getElementById('splash')
+
+    if (splash) {
+      splash.style.display = 'none'
+    }
+
+    building.value = false
+  }
 })
 </script>
 

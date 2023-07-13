@@ -25,6 +25,7 @@ export const useForecastStore = defineStore('forecast', () => {
   watch(() => Object.assign({}, location.value), async() => {
     await load(location.value.latitude, location.value.longitude, location.value.timezone)
     await useUnsplash.load(timelines.current.description)
+    loading.value = false
   })
 
   const loading = ref<boolean>(false)
