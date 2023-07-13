@@ -8,7 +8,7 @@ const { timelines } = storeToRefs(useForecast)
 </script>
 
 <template>
-  <div class="w-full flex gap-2 lg:gap-4 overflow-x-auto py-1">
+  <div class="w-full flex grid-flow-col gap-2 lg:gap-4 overflow-x-auto py-1">
     <WeekDay
       v-for="day in timelines.days"
       :key="day.startTime?.format('Y-m-d')"

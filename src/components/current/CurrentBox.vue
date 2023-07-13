@@ -15,22 +15,6 @@ const current = computed(() => {
   return timelines.value.current
 })
 
-const details = computed(() => {
-  const details = []
-
-  const fields = [
-    'Sensação ' + round(current.value.temperatureApparent) + '°C',
-    'Vento ' + round(current.value.windSpeed ?? 0) + ' km/h',
-    'Umidade ' + round(current.value.humidity) + '%',
-    'Chance de chuva ' + round(current.value.precipitationProbability) + '%'
-  ]
-
-  for (let id = 0; id < fields.length; id++) {
-    details.push({ id, text: fields[id] })
-  }
-
-  return details
-})
 
 function round(number: number | null | undefined) {
   return Math.round(number ?? 0)
@@ -51,7 +35,7 @@ function round(number: number | null | undefined) {
         :temperature="round(current.temperature)"
       />
 
-      <CurrentDetailsList :details="details" v-if="!loading" />
+      <CurrentDetailsList v-if="!loading" />
     </div>
   </section>
 </template>
