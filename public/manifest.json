@@ -1,0 +1,19 @@
+{
+  "android_package_name": "io.github.fe-lipe-alves",
+  "background_color": "#fff",
+  "display": "minimal-ui",
+  "icons": [
+    {
+      "src": "https://fe-lipe-alves.github.io/meteo-weather/tomorrow-icons/v2/large/png/10001_large@2x.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "gcm_sender_id": "1021726025582",
+  "gcm_user_visible_only": true,
+  "name": "Meteo Weather",
+  "orientation": "portrait",
+  "short_name": "Meteo Weather",
+  "start_url": "/?utm_source=homescreen_icon",
+  "theme_color": "#FFFFFF"
+}
