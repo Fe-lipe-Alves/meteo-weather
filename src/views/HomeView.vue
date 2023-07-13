@@ -48,7 +48,6 @@ async function getLocationFromBrowser() {
 
 onBeforeMount(async () => {
   loading.value = true
-  await useUnsplash.load()
   await getLocationFromBrowser()
   loading.value = false
 })
