@@ -14,6 +14,6 @@
   "name": "Meteo Weather",
   "orientation": "portrait",
   "short_name": "Meteo Weather",
-  "start_url": "meteo-weather",
+  "start_url": "https://fe-lipe-alves.github.io/meteo-weather",
   "theme_color": "#FFFFFF"
 }
