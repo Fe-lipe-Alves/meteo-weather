@@ -12,13 +12,18 @@ export const useUnsplashStore = defineStore('unsplash', () => {
   })
 
   const realImageUnsplash = computed(() => {
-    return unsplash.value.image.urls.regular
+    return unsplash.value.image.urls?.regular
   })
 
   const blurImageUnsplash = computed(() => {
-    const pixels = decode(unsplash.value.image.blur_hash, 150, 150)
-    const png = UPNG.encode([pixels], 150, 150, 256)
-    return 'data:image/png;base64,' + encode64(png)
+    if (unsplash.value.image.blur_hash) {
+      const pixels = decode(unsplash.value.image.blur_hash, 150, 150)
+      const png = UPNG.encode([pixels], 150, 150, 256)
+
+      return 'data:image/png;base64,' + encode64(png)
+    }
+
+    return ''
   })
 
   const backgroundImageUnsplash = computed(() => {
