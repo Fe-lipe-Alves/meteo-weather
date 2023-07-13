@@ -14,6 +14,6 @@
   "name": "Meteo Weather",
   "orientation": "portrait",
   "short_name": "Meteo Weather",
-  "start_url": "/?utm_source=homescreen_icon",
+  "start_url": "meteo-weather",
   "theme_color": "#FFFFFF"
 }
