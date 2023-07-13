@@ -1,5 +1,6 @@
 export class UnsplashImageModel {
   public id: string
+  public search: string
   public slug: string
   public created_at: string
   public updated_at: string
@@ -25,6 +26,7 @@ export class UnsplashImageModel {
 
   constructor(object: any) {
     this.id = object.id
+    this.search = object.search
     this.slug = object.slug
     this.created_at = object.created_at
     this.updated_at = object.updated_at
