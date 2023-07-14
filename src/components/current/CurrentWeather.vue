@@ -13,7 +13,7 @@ const { loading } = storeToRefs(useForecast)
 
 <template>
   <div
-    class="w-fit h-fit flex justify-center items-center px-8 py-1 my-4 gap-4 bg-zinc-50 rounded-full backdrop-blur-sm"
+    class="w-fit h-fit flex justify-center items-center px-8 py-1 my-4 gap-4 bg-zinc-50 dark:bg-black-olive dark:text-slate-300 rounded-full backdrop-blur-sm"
   >
     <span
       v-if="loading"

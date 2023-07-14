@@ -76,4 +76,10 @@ watch(() => loading.value, (newValue) => {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    --bg-subcolor: rgba(66, 46, 46, 0.3);
+  }
+}
 </style>

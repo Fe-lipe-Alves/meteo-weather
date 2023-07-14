@@ -29,7 +29,7 @@ function round(number: number | null | undefined) {
 </script>
 
 <template>
-  <div class="min-w-[6rem] lg:w-auto lg flex-1 flex items-center gap-2 p-2 flex-col bg-cultured rounded-md">
+  <div class="min-w-[6rem] lg:w-auto lg flex-1 flex items-center gap-2 p-2 flex-col bg-cultured dark:bg-black-olive dark:text-slate-300 rounded-md">
     <span>{{ dayName }}</span>
     <div class="flex-1 flex items-end">
       <IconItem
