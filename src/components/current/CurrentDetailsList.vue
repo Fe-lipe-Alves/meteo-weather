@@ -4,13 +4,6 @@ import {useForecastStore} from "@/stores/forecastStore";
 import {storeToRefs} from "pinia";
 import {computed} from "vue";
 
-const props = defineProps<{
-  details: {
-    id: number
-    text: string
-  }[]
-}>()
-
 const useForecast = useForecastStore()
 const { timelines } = storeToRefs(useForecast)
 
@@ -33,7 +26,7 @@ function round(number: number | null | undefined) {
     <CurrentDetailsListItem>Sensação {{ round(current.temperatureApparent) }} °C</CurrentDetailsListItem>
     <CurrentDetailsListItem>
       Vento {{ round(current.windSpeed ?? 0) }} km/h
-      <img src="src/assets/arrow.svg" height="16" width="16" alt="" class="ml-2" :style="windDirection">
+      <img src="@/assets/arrow.svg" height="16" width="16" alt="" class="ml-2" :style="windDirection">
     </CurrentDetailsListItem>
     <CurrentDetailsListItem>Umidade {{ round(current.humidity) }}%</CurrentDetailsListItem>
     <CurrentDetailsListItem>Chance de chuva {{ round(current.precipitationProbability) }}%</CurrentDetailsListItem>
