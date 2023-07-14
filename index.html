@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="icon" href="/tomorrow-icons/v2/large/png/10001_large.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/public/manifest.json">
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="white">
-    <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="black">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black">
     <title>MeteoWeather</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500;600&display=swap" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByIuWbL5ZbcqRsVfaLjDjwrERY5VIk2qU&libraries=places"></script>
@@ -27,15 +27,26 @@
             align-items: center;
             text-align: center;
             font-size: 1.25rem;
-            line-height: 1.75rem;
         }
 
         #splash .icon {
             animation: logoFade 2s ease 0s infinite normal forwards;
+            margin: 0;
         }
 
-        #splash h1 {
+        #splash .title {
+            font-size: 20px;
             animation: titleFade 2s;
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+            -moz-tab-size: 4;
+            -o-tab-size: 4;
+            tab-size: 4;
+            font-family: Montserrat, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-feature-settings: normal;
+            font-variation-settings: normal;
+            font-weight: 400;
+            margin: 0;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -63,21 +74,21 @@
             }
         }
     </style>
-  </head>
-  <body>
-      <div id="splash" class="w-screen h-screen absolute top-0 left-0 z-50 bg-cultured flex justify-center items-center">
-      <div class="text-center">
-          <img class="icon"
-               src="/tomorrow-icons/v2/large/png/10001_large@2x.png"
-               alt="Meteo Weather"
-               width="144"
-               height="144"
-          >
-          <h1 class="text-xl">Meteo Weather</h1>
-      </div>
-  </div>
+</head>
+<body>
+<div id="splash" class="w-screen h-screen absolute top-0 left-0 z-50 bg-cultured flex justify-center items-center">
+    <div>
+        <img class="icon"
+             src="/tomorrow-icons/v2/large/png/10001_large@2x.png"
+             alt="Meteo Weather"
+             width="144"
+             height="144"
+        >
+        <h1 class="title">Meteo Weather</h1>
+    </div>
+</div>
 
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<div id="app"></div>
+<script type="module" src="/src/main.ts"></script>
+</body>
 </html>

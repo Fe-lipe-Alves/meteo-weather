@@ -1,7 +1,7 @@
 {
   "android_package_name": "io.github.fe-lipe-alves",
   "background_color": "#fff",
-  "display": "minimal-ui",
+  "display": "standalone",
   "icons": [
     {
       "src": "https://fe-lipe-alves.github.io/meteo-weather/tomorrow-icons/v2/large/png/10001_large@2x.png",
