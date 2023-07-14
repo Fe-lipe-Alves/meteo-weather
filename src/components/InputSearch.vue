@@ -1,7 +1,7 @@
 <template>
   <div
       class="lg:w-96 pb-2 rounded-[1.4rem] relative"
-      :class="{ 'rounded-b-none bg-cultured': isFocus }"
+      :class="{ 'rounded-b-none bg-cultured dark:bg-black-olive dark:text-slate-300': isFocus }"
       v-click-outside="() => setFocus(false)"
 
       @focusin="setFocus(true)"
@@ -9,7 +9,7 @@
     <input
         type="text"
         autocomplete="off"
-        class="w-full rounded-[1.4rem] shadow px-8 py-2 text-center text-lg focus:outline-none bg-cultured/70"
+        class="w-full rounded-[1.4rem] shadow px-8 py-2 text-center text-lg focus:outline-none bg-cultured/70 dark:bg-black-olive/70 dark:text-slate-300"
         :class="{ 'bg-white': isFocus }"
         :value="search"
         @input="runSearch"

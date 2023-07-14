@@ -17,7 +17,7 @@ const { loading } = storeToRefs(useForecast)
 
 <template>
   <div
-    class="icon-box bg-slate-50/25 rounded-full p-4 flex justify-center items-center"
+    class="icon-box bg-slate-50/25 dark:bg-black-olive/25 rounded-full p-4 flex justify-center items-center"
     :class="{ 'loading-circle': loading }"
     :title="description"
   >
