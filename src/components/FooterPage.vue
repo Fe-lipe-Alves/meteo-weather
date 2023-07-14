@@ -9,7 +9,7 @@ const {unsplash} = storeToRefs(useUnsplash)
 
 <template>
   <footer
-    class="w-10/12 text-center lg:w-8/12 mx-auto grid gap-2 grid-cols-1 lg:grid-cols-3 justify-between items-center text-xs pb-1 text-cultured"
+    class="w-11/12 text-center lg:w-8/12 mx-auto grid gap-2 grid-cols-1 lg:grid-cols-3 justify-between items-center text-xs pb-1 text-cultured"
   >
     <p>Fonte meteorológica <a href="https://www.tomorrow.io">Tomorrow.io</a></p>
     <p>Desenvolvido por <a href="https://github.com/Fe-lipe-Alves">Felipe Alves</a></p>

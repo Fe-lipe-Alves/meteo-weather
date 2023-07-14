@@ -1,6 +1,6 @@
 <template>
   <header
-    class="w-10/12 lg:w-8/12 mx-auto flex flex-wrap grid-cols-3 justify-between items-center py-4 lg:py-8"
+    class="w-10/12 sm:w-6/12  lg:w-8/12 mx-auto flex flex-wrap grid-cols-3 justify-between items-center py-4 lg:py-8"
   >
     <div class="flex-grow-0 lg:flex-grow flex justify-start flex-1 order-1">
       <h1 class="text-white drop-shadow-lg">MeteoWeather</h1>

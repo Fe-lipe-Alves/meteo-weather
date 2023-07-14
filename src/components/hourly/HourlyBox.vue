@@ -31,7 +31,7 @@ const days = computed(() => {
 
 <template>
   <section class="w-full">
-    <div class="w-10/12 lg:w-8/12 bg-cultured mx-auto flex flex-col py-2 px-4 rounded-md">
+    <div class="w-11/12 lg:w-8/12 bg-cultured mx-auto flex flex-col py-2 px-4 rounded-md">
       <HourlyGroupDay :days="days" />
     </div>
   </section>
