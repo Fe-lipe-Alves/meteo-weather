@@ -37,7 +37,7 @@ export const useForecastStore = defineStore('forecast', () => {
 
     if (
       storage
-      && moment().diff(storage.current.startTime, 'hours') !== 0
+      && moment().diff(moment(storage.current.startTime), 'hours') === 0
       && storage.location
       && storage.location.latitude === latitude
       && storage.location.longitude === longitude
