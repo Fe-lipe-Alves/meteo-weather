@@ -8,7 +8,7 @@ export function pathToIcon(
   resolution: '@1x'|'@2x'|'' = ''
 ): string
 {
-  const dontExists = [1001, 4000, 4001, 4200]
+  const dontExists = [1001, 4000, 4001, 4200, 2100]
 
   if (sunMoon instanceof ForecastModel) {
     sunMoon = sunMoon.startTime?.isBetween(sunMoon.sunriseTime, sunMoon.sunsetTime) ? 0 : 1
