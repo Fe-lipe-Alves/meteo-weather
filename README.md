@@ -2,6 +2,8 @@
 
 **MeteoWeather** é um site de previsões meteorológicas projetado para oferecer uma experiência rápida e precisa para usuários com agendas movimentadas. Com um design simples e elegante, o MeteoWeather apresenta as informações mais relevantes para o seu dia, facilitando a consulta do clima sem complicações.
 
+[Leia a apresentação completa](./introduction.md)
+
 ### Recursos Técnicos:
 
 **Dados Meteorológicos:**
