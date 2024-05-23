@@ -1,6 +1,8 @@
 # MeteoWeather
 
-Um site de previsões meteorológicas simples e direto ao ponto.
+Um site de previsões meteorológicas simples e direto ao ponto. O site está disponível no link a seguir:
+
+[https://fe-lipe-alves.github.io/meteo-weather](https://fe-lipe-alves.github.io/meteo-weather/)
 
 ### Introdução
 O MeteoWeather é um serviço de previsões meteorológicas que visa oferecer leituras precisas e rápidas para usuários com rotinas corridas. Com um layout simples e elegante, facilitamos a experiência do usuário, fornecendo as informações mais relevantes para o seu dia.
@@ -14,7 +16,7 @@ Oferecemos dois métodos para obter a localização atual do usuário: através 
 Além de identificar a localização do usuário e fornecer a previsão para essa região, o MeteoWeather também permite a consulta da previsão para outras localidades, inserindo o nome da cidade ou endereço em um campo de busca. Nesse processo, utilizamos as APIs de localização do Google Maps para traduzir o endereço inserido em coordenadas globais.
 
 ### Estilo
-O MeteoWeather sempre apresenta uma imagem de fundo correspondente ao clima atual, obtida do banco de imagens gratuitas [Unsplash](https://unsplash.com/pt-br). Isso não só auxilia na percepção do clima, como uma paisagem chuvosa ou uma praia ensolarada, mas também torna o aplicativo visualmente atraente. Outra estratégia é a rápida apresentação das imagens de fundo, que, embora sejam de alta resolução, são renderizadas instantaneamente através da aplicação de definições de cores preliminares, acelerando a percepção do usuário.
+O MeteoWeather sempre apresenta uma imagem de fundo correspondente ao clima atual, obtida do banco de imagens gratuitas [Unsplash](https://unsplash.com/pt-br). Isso não só auxilia na percepção do clima, como uma paisagem chuvosa ou uma praia ensolarada, mas também torna o aplicativo visualmente atraente. Outra estratégia é a rápida apresentação das imagens de fundo, que, embora sejam de alta resolução, são renderizadas definições de cores preliminares  a partir do [BlurHash](https://blurha.sh/) da imagem, acelerando a percepção do usuário.
 
 Além disso, o MeteoWeather oferece um tema escuro que se adapta automaticamente às configurações predefinidas do dispositivo, proporcionando uma experiência visual consistente, independentemente das preferências de tema do usuário.
 
