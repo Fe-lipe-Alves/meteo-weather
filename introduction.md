@@ -8,7 +8,7 @@ O MeteoWeather é um serviço de previsões meteorológicas que visa oferecer le
 ### Meteorologia
 Utilizamos o serviço meteorológico [Tomorrow.io](https://www.tomorrow.io/) para fornecer dados de modelos climáticos. Este serviço é um ótimo provedor, oferecendo dados em tempo real para qualquer localização do mundo. Apesar de o Tomorrow.io disponibilizar previsões para até 16 dias à frente, o MeteoWeather exibe apenas os próximos 5 dias, evitando sobrecarregar o usuário com excesso de informações.
 
-## Localização
+### Localização
 Oferecemos dois métodos para obter a localização atual do usuário: através da API de localização nativa do navegador e por consulta de localização do IP. Recomendamos sempre que o usuário forneça consentimento para utilizar a localização do navegador, pois é mais precisa. Quando isso não é fornecido, o sistema faz automaticamente uma consulta ao provedor de geolocalização [IPinfo.io](https://ipinfo.io/) com base no IP do cliente.
 
 Além de identificar a localização do usuário e fornecer a previsão para essa região, o MeteoWeather também permite a consulta da previsão para outras localidades, inserindo o nome da cidade ou endereço em um campo de busca. Nesse processo, utilizamos as APIs de localização do Google Maps para traduzir o endereço inserido em coordenadas globais.
